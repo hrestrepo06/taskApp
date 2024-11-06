@@ -1,0 +1,47 @@
+<ion-content>
+  <app-header backButton="/auth"></app-header>
+  <app-logo></app-logo>
+
+  <h2 class="ion-text-center ion-no-margin">Nuevo Usuario</h2>
+
+  <div class="content">
+    <div class="d-flex-center">
+      <form class="ion-text-center" (keyup.enter)="submit()" (ngSubmit)="submit()">
+      
+        <app-custom-input autocomplete="name" [control]="form.controls.name" type="text" label="Nombre" icon="person-outline" />
+
+        <div class="validators" *ngIf="form.controls.name.errors && form.controls.name.dirty" >
+          <div *ngIf="form.controls.name.errors?.['required']">Ingresa tu nombre </div>
+          <div *ngIf="form.controls.name.errors?.['minlength']">Ingresa un nombre valido </div>
+        </div>
+      
+        <app-custom-input autocomplete="email" [control]="form.controls.email" type="email" label="Correo" icon="mail-outline" />
+
+        <div class="validators" *ngIf="form.controls.email.errors && form.controls.email.dirty" >
+          <div *ngIf="form.controls.email.errors?.['required']">Ingresa tu email </div>
+          <div *ngIf="form.controls.email.errors?.['email']">Ingresa un email valido </div>
+        </div>
+
+        <app-custom-input [control]="form.controls.password" type="password" label="Contrasena" icon="lock-closed-outline" />
+
+        <div class="validators" *ngIf="form.controls.password.errors && form.controls.password.dirty" >
+          <div *ngIf="form.controls.password.errors?.['required']">Ingresa tu contrasenha </div>
+        </div>
+
+        <app-custom-input [control]="form.controls.confirmPassword" type="password" label="Confirmar contrasenha" 
+        icon="checkmark-circle-outline" />
+
+        <div class="validators" *ngIf="form.controls.confirmPassword.errors && form.controls.confirmPassword.dirty" >
+          <div *ngIf="form.controls.confirmPassword.errors?.['required']">Ingresa tu contrasenha </div>
+          <div *ngIf="form.controls.confirmPassword.errors?.['noMatch']">Las contrasenhas no coinciden </div>
+        </div>
+
+        <ion-button class="ion-margin-vertical" [disabled]="form.invalid" type="submit" shape="round">
+          Registrarme
+          <ion-icon slot="end" name="person-add-outline"></ion-icon>
+        </ion-button>
+
+      </form>
+    </div>
+  </div>
+</ion-content>
