@@ -1,11 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import {
   IonContent,
-  IonHeader,
-  IonTitle,
-  IonToolbar,
   IonGrid,
   IonCol,
   IonRow,
@@ -18,7 +14,10 @@ import { Tasks } from '../../../models/task.models';
 
 import { TaskProgressComponent } from '../../../components/taskProgress/taskProgress.component';
 import { addIcons } from 'ionicons';
-import { eyeOutline, trashOutline } from 'ionicons/icons';
+import { addCircleOutline, eyeOutline, trashOutline } from 'ionicons/icons';
+import { FirebaseService } from 'src/app/services/firebase.service';
+import { UtilsService } from 'src/app/services/utils.service';
+import { AddUpdateTaskComponent } from 'src/app/components/add-update-task/add-update-task.component';
 
 @Component({
   selector: 'app-home',
@@ -33,16 +32,15 @@ import { eyeOutline, trashOutline } from 'ionicons/icons';
     IonCol,
     IonGrid,
     IonContent,
-    IonHeader,
-    IonTitle,
-    IonToolbar,
     CommonModule,
-    FormsModule,
     HeaderComponent,
     TaskProgressComponent,
   ],
 })
 export class HomePage implements OnInit {
+  private firebaseSvc = inject(FirebaseService);
+  private utilsSvc = inject(UtilsService);
+
   tasks: Tasks[] = [
     {
       id: '1',
@@ -51,8 +49,8 @@ export class HomePage implements OnInit {
         'Crear una funcion que permita autenticar al usuario con google',
       items: [
         { name: 'Actividad 1', completed: true },
-        { name: 'Actividad 2', completed: false },
-        { name: 'Actividad 3', completed: false },
+        { name: 'Actividad 2', completed: true },
+        { name: 'Actividad 3', completed: true },
       ],
     },
     {
@@ -73,15 +71,31 @@ export class HomePage implements OnInit {
         'Crear una funcion que permita autenticar al usuario con google',
       items: [
         { name: 'Actividad 1', completed: true },
-        { name: 'Actividad 2', completed: false },
+        { name: 'Actividad 2', completed: true },
         { name: 'Actividad 3', completed: false },
       ],
     },
   ];
 
   constructor() {
-    addIcons({eyeOutline,trashOutline})
+    addIcons({eyeOutline,trashOutline, addCircleOutline})
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.addOrUpdateTask();
+  }
+  
+  getPercentage(task: Tasks): number{
+    return this.utilsSvc.getPercentage(task);
+  }
+  
+  addOrUpdateTask(task?: Tasks){
+    this.utilsSvc.presentModal({
+      component: AddUpdateTaskComponent,
+      componentProps: (task),
+      cssClass: 'add-update-modal'
+    })
+  }
+  
+  
 }

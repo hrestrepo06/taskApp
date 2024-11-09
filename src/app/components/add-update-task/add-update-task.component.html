@@ -1,0 +1,10 @@
+<ion-content color="light">
+<app-header color="light" [centerTitle]=true [isModal]=true title="Tarea"></app-header>
+
+<app-custom-input [control]="form.controls.title" type="text" label="Titulo" />
+<div class="validators" *ngIf="form.controls.title.errors && form.controls.title.dirty" >
+  <div *ngIf="form.controls.title.errors?.['required']">Este campo es requerido </div>
+  <div *ngIf="form.controls.title.errors?.['minlength']">Este campo requiere al menos 4 caracteres </div>
+</div>
+
+</ion-content>

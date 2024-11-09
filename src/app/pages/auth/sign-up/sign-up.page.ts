@@ -1,18 +1,14 @@
 
 import { Component, inject, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgIf } from '@angular/common';
 import {
   FormControl,
   FormGroup,
-  FormsModule,
   Validators,
 } from '@angular/forms';
 
 import {
   IonContent,
-  IonHeader,
-  IonTitle,
-  IonToolbar,
   IonButton,
   IonIcon,
 } from '@ionic/angular/standalone';
@@ -23,7 +19,7 @@ import { CustomInputComponent } from 'src/app/components/custom-input/custom-inp
 
 import { addIcons } from 'ionicons';
 import { alertCircleOutline, checkmarkCircleOutline, lockClosedOutline, logInOutline, mailOutline, personAddOutline, personOutline } from 'ionicons/icons';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { User } from 'src/app/models/user.models';
 import { UtilsService } from 'src/app/services/utils.service';
@@ -37,15 +33,11 @@ import { UtilsService } from 'src/app/services/utils.service';
     IonIcon,
     IonButton,
     IonContent,
-    IonHeader,
-    IonTitle,
-    IonToolbar,
-    CommonModule,
-    FormsModule,
+  //  CommonModule,
     HeaderComponent,
     LogoComponent,
     CustomInputComponent,
-    RouterLink
+    NgIf
   ],
 })
 export class SignUpPage implements OnInit {

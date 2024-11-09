@@ -2,6 +2,12 @@
   <app-header title="Tareas"></app-header>
 
   <div class="content">
+  
+    <ion-button (click)="addOrUpdateTask()" class="ion-magin" mode="ios" >
+      Nueva Tarea
+      <ion-icon slot="end" name="add-circle-outline"></ion-icon>
+    </ion-button>
+  
     <ion-grid>
       <ion-row>
         <ion-col
@@ -21,7 +27,7 @@
                   size-sm="4"
                   size="12"
                 >
-                  <app-task-progress />
+                  <app-task-progress [avance]="getPercentage(task)" />
                 </ion-col>
                 <ion-col
                   class="ion-padding"

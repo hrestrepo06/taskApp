@@ -13,6 +13,7 @@ import { provideDatabase, getDatabase } from '@angular/fire/database';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { importProvidersFrom } from '@angular/core';
+import { ModalController } from '@ionic/angular'; 
 
 
 bootstrapApplication(AppComponent, {
@@ -27,15 +28,12 @@ bootstrapApplication(AppComponent, {
     provideDatabase(() => getDatabase()),
     
     importProvidersFrom(NgCircleProgressModule.forRoot({
-      radius: 100,
-      outerStrokeWidth: 16,
-      innerStrokeWidth: 8,
       outerStrokeColor: '#78C000',
       innerStrokeColor: '#C7E596',
       animation: true,
       animationDuration: 300,
     })),
-    
+    ModalController,
   ],
 });
 

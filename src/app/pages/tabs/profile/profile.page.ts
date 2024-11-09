@@ -1,11 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+
 import {
   IonContent,
-  IonHeader,
-  IonTitle,
-  IonToolbar,
   IonIcon,
   IonButton,
 } from '@ionic/angular/standalone';
@@ -26,11 +22,6 @@ import { User } from 'src/app/models/user.models';
     IonButton,
     IonIcon,
     IonContent,
-    IonHeader,
-    IonTitle,
-    IonToolbar,
-    CommonModule,
-    FormsModule,
     HeaderComponent,
   ],
 })

@@ -7,15 +7,14 @@ import {
   IonLabel,
   IonIcon,
   IonButton,
-  IonButtons,
-} from '@ionic/angular/standalone';
+  IonButtons, IonTextarea } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { eyeOffOutline, eyeOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-custom-input',
   standalone: true,
-  imports: [
+  imports: [IonTextarea, 
     IonButtons,
     IonButton,
     IonIcon,

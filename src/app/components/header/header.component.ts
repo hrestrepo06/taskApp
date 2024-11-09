@@ -16,6 +16,7 @@ import { addIcons } from 'ionicons';
 import { closeCircleOutline, sunnyOutline, moonOutline } from 'ionicons/icons';
 
 import { ThemeService } from 'src/app/services/theme.service';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   standalone: true,
@@ -41,8 +42,9 @@ export class HeaderComponent implements OnInit {
   @Input() color!: string;
   @Input() centerTitle!: Boolean;
 
-  darkMode!: BehaviorSubject<boolean>;
+  darkMode: BehaviorSubject<boolean>;
   themeSvc = inject(ThemeService);
+  utilSvc = inject(UtilsService);
 
   constructor() {
     addIcons({
@@ -56,6 +58,10 @@ export class HeaderComponent implements OnInit {
     this.darkMode = this.themeSvc.darkMode;
   }
 
+  dismissModal(){
+    this.utilSvc.dismissModal();
+  }
+  
   setTheme(darkMode: boolean) {
     this.themeSvc.setTheme(darkMode);
   }
