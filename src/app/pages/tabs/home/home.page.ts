@@ -15,7 +15,6 @@ import { Tasks } from '../../../models/task.models';
 import { TaskProgressComponent } from '../../../components/taskProgress/taskProgress.component';
 import { addIcons } from 'ionicons';
 import { addCircleOutline, eyeOutline, trashOutline } from 'ionicons/icons';
-import { FirebaseService } from 'src/app/services/firebase.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { AddUpdateTaskComponent } from 'src/app/components/add-update-task/add-update-task.component';
 
@@ -38,7 +37,6 @@ import { AddUpdateTaskComponent } from 'src/app/components/add-update-task/add-u
   ],
 })
 export class HomePage implements OnInit {
-  private firebaseSvc = inject(FirebaseService);
   private utilsSvc = inject(UtilsService);
 
   tasks: Tasks[] = [
@@ -78,11 +76,11 @@ export class HomePage implements OnInit {
   ];
 
   constructor() {
-    addIcons({eyeOutline,trashOutline, addCircleOutline})
+   addIcons({eyeOutline,trashOutline, addCircleOutline})
   }
 
   ngOnInit() {
-    this.addOrUpdateTask();
+    this.addOrUpdateTask(this.tasks[0]);
   }
   
   getPercentage(task: Tasks): number{
@@ -92,7 +90,7 @@ export class HomePage implements OnInit {
   addOrUpdateTask(task?: Tasks){
     this.utilsSvc.presentModal({
       component: AddUpdateTaskComponent,
-      componentProps: (task),
+      componentProps: {task},
       cssClass: 'add-update-modal'
     })
   }

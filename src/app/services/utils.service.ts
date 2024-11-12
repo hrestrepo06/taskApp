@@ -53,15 +53,28 @@ export class UtilsService {
   // PRESENT
 
   async presentModal(opts: ModalOptions) {
-  
+  /*
       const modal = await this.modalController.create(opts);
       await modal.present();
       
       const {data} = await modal.onWillDismiss();
-      
+     
       if (data) {
          return data;
       }
+      */
+      
+      try {
+        const modal = await this.modalController.create(opts);
+        await modal.present();
+        
+        const { data } = await modal.onWillDismiss();
+        return data || null;  // Devuelve `null` si no hay datos
+      } catch (error) {
+        console.error('Error al presentar el modal:', error);
+        return null;
+      }
+      
     }
     
   // DISMISS

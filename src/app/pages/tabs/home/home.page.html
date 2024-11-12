@@ -3,7 +3,7 @@
 
   <div class="content">
   
-    <ion-button (click)="addOrUpdateTask()" class="ion-magin" mode="ios" >
+    <ion-button (click)="addOrUpdateTask()" class="ion-margin" mode="ios" >
       Nueva Tarea
       <ion-icon slot="end" name="add-circle-outline"></ion-icon>
     </ion-button>
@@ -21,7 +21,7 @@
             <ion-grid>
               <ion-row>
                 <ion-col
-                  class="ion-text-ceter"
+                  class="ion-text-center"
                   size-lg="5"
                   size-md="5"
                   size-sm="4"
@@ -41,7 +41,7 @@
 
                   <div class="ion-text-center">
                   
-                    <ion-button class="task-btn" mode="ios" size="small">
+                    <ion-button (click)="addOrUpdateTask(task)" class="task-btn" mode="ios" size="small">
                       Ver Tarea
                       <ion-icon slot="end" name="eye-outline"></ion-icon>
                     </ion-button>

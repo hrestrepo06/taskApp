@@ -1,6 +1,10 @@
 import { inject, Injectable } from '@angular/core';
 
-import { Auth, authState, createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, updateProfile, UserCredential } from '@angular/fire/auth';
+import { Auth, authState, createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, 
+updateProfile, UserCredential } from '@angular/fire/auth';
+
+import { Firestore, collection, collectionGroup, getDocs, query, where } from '@angular/fire/firestore';
+
 import { User } from '../models/user.models';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
@@ -12,6 +16,7 @@ export class FirebaseService {
 
   private auth: Auth = inject(Auth);
   private router: Router = inject(Router);
+  private db = inject(Firestore);
   
   constructor() { }
   
@@ -55,6 +60,10 @@ export class FirebaseService {
     await this.auth.signOut();
     this.router.navigate(['/auth']);
     localStorage.removeItem('user');
+  }
+  
+  getSubcollection(path: string, subcollectionName: string){
+    return collection(this.db, `${path}/${subcollectionName}`);
   }
   
 }

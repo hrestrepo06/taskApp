@@ -1,17 +1,13 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgIf } from '@angular/common';
 import {
   FormControl,
   FormGroup,
-  FormsModule,
   Validators,
 } from '@angular/forms';
 
 import {
   IonContent,
-  IonHeader,
-  IonTitle,
-  IonToolbar,
   IonButton,
   IonIcon,
 } from '@ionic/angular/standalone';
@@ -36,15 +32,11 @@ import { UtilsService } from 'src/app/services/utils.service';
     IonIcon,
     IonButton,
     IonContent,
-    IonHeader,
-    IonTitle,
-    IonToolbar,
-    CommonModule,
-    FormsModule,
     HeaderComponent,
     LogoComponent,
     CustomInputComponent,
-    RouterLink
+    RouterLink,
+    NgIf
   ],
 })
 export class AuthPage implements OnInit {
