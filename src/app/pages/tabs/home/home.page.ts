@@ -128,7 +128,7 @@ export class HomePage implements OnInit {
     try {
       this.items =  await this.firebaseSvc.getSubcollection();
       this.tasks = this.items
-      
+      console.log(this.tasks);
     } catch (error) {
       console.error('Error fetching subcollection:', error);
     }
