@@ -17,6 +17,8 @@ import { addIcons } from 'ionicons';
 import { addCircleOutline, eyeOutline, trashOutline } from 'ionicons/icons';
 import { UtilsService } from 'src/app/services/utils.service';
 import { AddUpdateTaskComponent } from 'src/app/components/add-update-task/add-update-task.component';
+import { FirebaseService } from 'src/app/services/firebase.service';
+
 
 @Component({
   selector: 'app-home',
@@ -38,9 +40,14 @@ import { AddUpdateTaskComponent } from 'src/app/components/add-update-task/add-u
 })
 export class HomePage implements OnInit {
   private utilsSvc = inject(UtilsService);
+  private firebaseSvc = inject(FirebaseService);
 
-  tasks: Tasks[] = [
-    {
+  tasks: Tasks[] = [];
+  items: Tasks[] = [];
+  //items: { id: string; }[];
+  //items: Tasks[] = [];
+  
+   /* {
       id: '1',
       title: 'Autenticacion con Google',
       description:
@@ -74,13 +81,18 @@ export class HomePage implements OnInit {
       ],
     },
   ];
+  */
 
   constructor() {
    addIcons({eyeOutline,trashOutline, addCircleOutline})
   }
 
   ngOnInit() {
-    this.addOrUpdateTask(this.tasks[0]);
+
+  }
+  
+  ionViewWillEnter() {
+    this.getTask();
   }
   
   getPercentage(task: Tasks): number{
@@ -95,5 +107,31 @@ export class HomePage implements OnInit {
     })
   }
   
+  /*
+  getTask(){
+    let user: User = this.utilsSvc.getElementFromLocalStorage('user');
+    let path = `users/${user.uid}`;
+    
+    /*
+    this.firebaseSvc.getSubcollection(path,'tasks').subscribe({
+      next: (res) => {
+        console.log(res);
+      }
+    })
+    
+
+  }*/
+
   
+  async getTask() {
+     
+    try {
+      this.items =  await this.firebaseSvc.getSubcollection();
+      this.tasks = this.items
+      
+    } catch (error) {
+      console.error('Error fetching subcollection:', error);
+    }
+  }
+
 }
