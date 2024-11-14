@@ -3,7 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { Auth, authState, createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, 
 updateProfile, UserCredential } from '@angular/fire/auth';
 
-import { Firestore, collection, collectionGroup, getDocs, query, where } from '@angular/fire/firestore';
+import { Firestore, collection, collectionGroup, getDocs, query, where, addDoc, updateDoc, doc, deleteDoc} from '@angular/fire/firestore';
 
 import { User } from '../models/user.models';
 import { Observable } from 'rxjs';
@@ -87,6 +87,38 @@ export class FirebaseService {
       } as Tasks;
       
     });
+  }
+  
+
+  async addToSubcollection(path: string, subcollection: string, object: any): Promise<void> {
+    
+    try {
+      const tasksCollection = collection(this.db, `${path}/${subcollection}`);
+
+      await addDoc(tasksCollection, object);
+    } catch (error) {
+      console.error('Error adding document: ', error);
+    }
+  }
+  
+  async updateDocument(path: string, object: any): Promise<void> {
+    try {
+      // Crea una referencia al documento específico en la subcolección `task`
+      const taskDocRef = doc(this.db, `${path}`);
+      await updateDoc(taskDocRef, object);
+    } catch (error) {
+      console.error('Error updating document: ', error);
+    }
+  }
+  
+  async deleteDocument(path: string): Promise<void> {
+    try {
+      // Crea una referencia al documento específico en la subcolección `task`
+      const taskDocRef = doc(this.db, `${path}`);
+      await deleteDoc(taskDocRef);
+    } catch (error) {
+      console.error('Error deleting document: ', error);
+    }
   }
   
 }

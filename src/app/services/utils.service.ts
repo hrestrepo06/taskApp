@@ -88,7 +88,6 @@ export class UtilsService {
     let percentage = (100 / totalItems) * completedItems
     
     return Math.round(percentage);
-    //return parseInt(percentage.toString());
   }
   
 }
