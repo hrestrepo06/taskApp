@@ -65,12 +65,8 @@ export class FirebaseService {
     localStorage.removeItem('user');
   }
   
-  async getSubcollection(): Promise<Tasks[]>{
-    
-    let user: User = this.utilsSvc.getElementFromLocalStorage('user');
-    let path = `users/${user.uid}`;
- 
-    const subcollectionRef = collection(this.db, `${path}/tasks`);
+  async getSubcollection(path: string): Promise<Tasks[]>{
+    const subcollectionRef = collection(this.db, `${path}`);
     
     // Obtener los documentos de la subcolección
     const snapshot = await getDocs(subcollectionRef);

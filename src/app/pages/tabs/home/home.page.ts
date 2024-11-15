@@ -17,6 +17,8 @@ import { TaskProgressComponent } from '../../../components/taskProgress/taskProg
 import { addIcons } from 'ionicons';
 import {
   addCircleOutline,
+  alertCircleOutline,
+  checkmarkCircleOutline,
   createOutline,
   eyeOutline,
   trashOutline,
@@ -55,7 +57,7 @@ export class HomePage implements OnInit {
   items: Tasks[] = [];
 
   constructor() {
-    addIcons({ eyeOutline, trashOutline, addCircleOutline, createOutline });
+    addIcons({ eyeOutline, trashOutline, addCircleOutline, createOutline, alertCircleOutline, checkmarkCircleOutline});
   }
 
   ngOnInit() {}
@@ -101,9 +103,14 @@ export class HomePage implements OnInit {
   }*/
 
   async getTask() {
+    //let user: User = this.utilsSvc.getElementFromLocalStorage('user');
+    
+    let user = this.getUser();
+    let path = `users/${user.uid}/tasks`;
+
     try {
       this.loading = true;
-      this.items = await this.firebaseSvc.getSubcollection();
+      this.items = await this.firebaseSvc.getSubcollection(path);
       this.tasks = this.items;
       console.log(this.tasks);
       this.loading = false;
@@ -142,7 +149,7 @@ export class HomePage implements OnInit {
         this.utilsSvc.presentToast({
           message: 'Tarea eliminada exitosamente',
           color: 'success',
-          icon: 'checkmark-circle-outline',
+          icon: 'alert-circle-outline',
           duration: 1500,
         });
         this.getTask();
@@ -152,7 +159,7 @@ export class HomePage implements OnInit {
         this.utilsSvc.presentToast({
           message: error,
           color: 'warning',
-          icon: 'alert-circle-outline',
+          icon: 'checkmark-circle-outline',
           duration: 5000,
         });
 
